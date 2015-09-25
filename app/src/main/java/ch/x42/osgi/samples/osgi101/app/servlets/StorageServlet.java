@@ -21,8 +21,8 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.x42.osgi.samples.osgi101.core.CoreConstants;
-import ch.x42.osgi.samples.osgi101.core.Storage;
+import com.intellizonex.gateway.core.CoreConstants;
+import com.intellizonex.gateway.core.Storage;
 
 /** Servlet that implements GET and POST access
  *  to our Storage component, mounted on /store

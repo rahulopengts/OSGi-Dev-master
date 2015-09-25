@@ -13,12 +13,12 @@
         <relativePath />
     </parent>
 
-    <groupId>ch.x42.osgi</groupId>
+    <groupId>com.intellizones.gateway</groupId>
     <artifactId>osgi-fw-app</artifactId>
     <packaging>bundle</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>OSGi for mere mortals - Application Bundle</name>
+    <name>OSGi IntelliZones Application Bundle</name>
     <inceptionYear>2011</inceptionYear>
 
     <prerequisites>
@@ -68,7 +68,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>ch.x42.osgi</groupId>
+            <groupId>com.intellizones.gateway</groupId>
             <artifactId>osgi-fw-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>provided</scope>

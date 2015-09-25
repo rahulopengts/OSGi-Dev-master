@@ -10,12 +10,12 @@
         <relativePath/>
     </parent>
 
-    <groupId>ch.x42.osgi</groupId>
+    <groupId>com.intellizones.gateway</groupId>
     <artifactId>osgi-fw-reactor</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>OSGi for mere mortals - Reactor POM</name>
+    <name>OSGi Intellizones POM</name>
     <inceptionYear>2011</inceptionYear>
 
     <prerequisites>
@@ -44,6 +44,5 @@
         <module>core</module>
     <module>myosgi</module>
     <module>com.webproject</module>
-    <module>com.iot.gateway.httpservice</module>
   </modules>
 </project>

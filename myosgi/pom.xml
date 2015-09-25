@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>ch.x42.osgi</groupId>
-    <artifactId>osgi-for-mere-mortals-reactor</artifactId>
+    <groupId>com.intellizones.gateway</groupId>
+    <artifactId>osgi-fw-reactor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>org.myosgi</groupId>
@@ -24,7 +24,7 @@
       <scope>test</scope>
     </dependency>
         <dependency>
-            <groupId>ch.x42.osgi</groupId>
+            <groupId>com.intellizones.gateway</groupId>
             <artifactId>osgi-fw-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>provided</scope>
@@ -81,9 +81,8 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-						<Bundle-Activator>org.myosgi.MyActivator</Bundle-Activator>                        
-                        <Private-Package>org.myosgi.*</Private-Package>
-                        <Export-Package>!*</Export-Package>
+						<Bundle-Activator>org.myosgi.MyActivator</Bundle-Activator>												                      
+                        <Export-Package>org.myosgi.*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

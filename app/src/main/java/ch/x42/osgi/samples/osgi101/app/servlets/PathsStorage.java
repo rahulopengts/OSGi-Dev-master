@@ -7,7 +7,7 @@ import java.util.Set;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 
-import ch.x42.osgi.samples.osgi101.core.Storage;
+import com.intellizonex.gateway.core.Storage;
 
 /** Storage that stores paths only, disabled by default,
  *  used to demonstrate switching services dynamically */
