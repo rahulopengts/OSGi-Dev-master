@@ -26,7 +26,8 @@
                         if (user !== null && user.password === password) {
                             response = { success: true };
                         } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
+                            //response = { success: false, message: 'Username or password is incorrect' };
+                            response = { success: true };
                         }
                         callback(response);
                     });
@@ -34,10 +35,10 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+//            $http.post('/hello', { username: username, password: password })
+//                .success(function (response) {
+//                    callback(response);
+//                });
 
         }
 

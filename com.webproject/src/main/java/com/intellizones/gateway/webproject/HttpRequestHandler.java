@@ -12,26 +12,32 @@ import org.apache.commons.io.IOUtils;
 import org.myosgi.DictionaryImpl;
 import org.myosgi.DictionaryService;
 
-public class HttpRequestHandler extends HttpServlet {
+import com.intellizones.gateway.webproject.httphandler.IHttpHandlers;
+import com.intellizones.gateway.webproject.util.IINtelliZones;
+
+public class HttpRequestHandler extends HttpServlet implements IINtelliZones{
 //java -jar target/osgi-for-mere-mortals-launcher-0.0.1-SNAPSHOT.jar
 	@Override
 	  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	    //resp.getWriter().write("Hello World");
 		System.out.println("\n YESDDD");
+		System.out.println("\n REQUES "+req);
+		System.out.println("\n REQUES "+req.getParameter("profileName"));
 		String temlate	=	getSnippet("createprofile");
 		printDebugMessage("doGet",temlate);
 		resp.getWriter().write(temlate);
 	  }
 	
-
-	public static final String	TEMPLATE_LOCATION	=	"templates/";
-	public static final String	TEMPLATE_EXT	=	".html";
+	@Override
+	  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			doGet(req,resp);
+		}
 	
-	protected synchronized String getSnippet(String elementType){
+	public synchronized String getSnippet(String elementType){
 		elementType = elementType.toLowerCase();
 		String template	=	null;
 
-			String snippetLocation = TEMPLATE_LOCATION + elementType + TEMPLATE_EXT;
+			String snippetLocation = IHttpHandlers.TEMPLATE_LOCATION + elementType + IHttpHandlers.TEMPLATE_EXT;
 			URL entry = Activator.getContext().getBundle().getEntry(snippetLocation);
 			printDebugMessage(this.toString(), "URL Entry "+entry);
 			

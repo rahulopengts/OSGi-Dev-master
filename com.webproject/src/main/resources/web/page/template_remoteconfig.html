@@ -1,0 +1,51 @@
+	  
+        <h1>System Remote Connection Configuration</h1>
+        
+        
+          <legend><span class="number">1</span>Information</legend>
+          <label for="name">Connectivity Name:</label>
+          <input type="text" id="profileName" name="profileName" required=true>
+          
+          <label for="mail">Connectivity ID:</label>
+          <input type="text" id="profileID" name="profileID" required=true>
+
+          <label for="mail">Remote Connectivity Type:</label>
+          <input type="text" id="remoteConType" name="remoteConType" required=true>
+
+          <label for="mail">Security Key:</label>
+          <input type="text" id="secureKey" name="secureKey" required=true>
+
+                    
+         </fieldset>
+<fieldset style="width:80%" align="center">
+<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
+ 
+    <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
+
+<!-- <TABLE ID="dataTable" border="1" STYLE="border width="300" orange dashed;background color:#F0E68C;table-row width:2;"> -->	
+<TABLE id="dataTable" width="350px" border="1">
+        <TR>
+            <TD class="row1"><INPUT type="checkbox" name="chk" /></TD>
+            <TD class="row2"><INPUT type="text" name="txt" /></TD>
+            <TD class="row3">
+                <SELECT name="country" >
+                    <OPTION value="in">India</OPTION>
+                    <OPTION value="de">Germany</OPTION>
+                    <OPTION value="fr">France</OPTION>
+                    <OPTION value="us">United States</OPTION>
+                    <OPTION value="ch">Switzerland</OPTION>
+                </SELECT>
+            </TD>
+        </TR>
+    </TABLE>
+ 
+
+        <button type="submit">Create</button>
+        
+
+	  <div id="hiddenFields">
+	  <input type="hidden" id="action" name="action" value="remoteconfig_submit">
+<input type="hidden" id="appmode" name="appmode" value="">
+<input type="hidden" id="mode" name="mode" value="">
+<input type="hidden" id="nextpage" name="nextpage" value="localconfig_render">
+	  </div>

@@ -10,6 +10,8 @@ import org.osgi.service.http.NamespaceException;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
+import com.intellizones.gateway.webproject.util.ApplicationDataHolder;
+
 public class Activator implements BundleActivator,ServiceTrackerCustomizer {
 	static private BundleContext context;
 	
@@ -71,18 +73,22 @@ public class Activator implements BundleActivator,ServiceTrackerCustomizer {
 		@Override
 		public Object addingService(ServiceReference reference) {
 			// TODO Auto-generated method stub
-			HttpService service = (HttpService) context.getService(reference);
-      		 try {
-			if (service != null) {
+		HttpService service = (HttpService) context.getService(reference);
+      	try {
+      		if (service != null) {
 				service.registerServlet("/hello", new HttpRequestHandler(), null, null);
+				service.registerServlet("/init", new IntellizonesServlet(), null, null);
 				service.registerResources("/files", "/web", null);
+				ApplicationDataHolder.getApplicationDataHolder();
 			}
 		} catch (NamespaceException e) {
 			e.printStackTrace();
 		} catch (ServletException e){
 			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
 		}
-      		return service;			
+      	return service;			
 		}
 
 		@Override

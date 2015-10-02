@@ -1,4 +1,5 @@
 @echo off
+call cd..
 call cd com.webproject
 call mvn -o clean install
 call cd..
@@ -9,4 +10,4 @@ call copy D:\Home_Auto\raspberry\Latest\Apache-Felix\apache-ibm\OSGi-Dev-master\
 
 call cd launcher
 
-call java -jar target/osgi-fw-launcher-0.0.1-SNAPSHOT.jar
+call java -DGATEWAYHOME=D:\Home_Auto\raspberry\Latest\Apache-Felix\apache-ibm\OSGi-Dev-master\appconfig -jar target/osgi-fw-launcher-0.0.1-SNAPSHOT.jar

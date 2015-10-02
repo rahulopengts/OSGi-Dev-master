@@ -42,7 +42,7 @@
         <module>launcher</module>
         <module>app</module>
         <module>core</module>
-    <module>myosgi</module>
-    <module>com.webproject</module>
+		<module>myosgi</module>
+		<module>com.wabapp</module>
   </modules>
 </project>

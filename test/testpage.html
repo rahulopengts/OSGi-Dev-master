@@ -1,0 +1,139 @@
+
+  <head>
+        <meta charset="utf-8">
+        <iinitial-scale=1.0">
+        <title>System Configuration</title>
+
+        <link rel="stylesheet" href="logincss.css">
+        <link rel="stylesheet" href="extcss.css">
+        <link rel="stylesheet" href="listconnprofile.css">
+        <link href='http://fonts.godasdasogleapis.com/css?family=Nunito:800,800' rel='stylesheet' type='text/css'>
+
+    <SCRIPT language="javascript">
+        function addRow(tableID) {
+ 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+            var colCount = table.rows[0].cells.length;
+ 
+            for(var i=0; i<colCount; i++) {
+ 
+                var newcell = row.insertCell(i);
+ 
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+                }
+            }
+        }
+ 
+        function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+ 
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+ 
+ 
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+ 
+    </SCRIPT>
+
+    </head>
+    <body>
+	  <div id="WebApp">
+      	<header id="header">
+		<h1 id="title">System Administration</h1>
+		</header>
+	  </div>
+
+	  <div id="webbody" class="ScrollStyle">
+      <fieldset>
+	  <form action="/init" method="post">	  
+	  
+        <h1>System Remote Connection Configuration</h1>
+        
+        
+          <legend><span class="number">1</span>Information</legend>
+          <label for="name">Connectivity Name:</label>
+          <input type="text" id="profileName" name="profileName" required=true>
+          
+          <label for="mail">Connectivity ID:</label>
+          <input type="text" id="profileID" name="profileID" required=true>
+
+          <label for="mail">Remote Connectivity Type:</label>
+          <input type="text" id="remoteConType" name="remoteConType" required=true>
+
+          <label for="mail">Security Key:</label>
+          <input type="text" id="secureKey" name="secureKey" required=true>
+
+                    
+         </fieldset>
+<fieldset style="width:80%" align="center">
+<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
+ 
+    <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
+
+<!-- <TABLE ID="dataTable" border="1" STYLE="border width="300" orange dashed;background color:#F0E68C;table-row width:2;"> -->	
+<TABLE id="dataTable" width="350px" border="1">
+        <TR>
+            <TD class="row1"><INPUT type="checkbox" name="chk" /></TD>
+            <TD class="row2"><INPUT type="text" name="txt" /></TD>
+            <TD class="row3">
+                <SELECT name="country" >
+                    <OPTION value="in">India</OPTION>
+                    <OPTION value="de">Germany</OPTION>
+                    <OPTION value="fr">France</OPTION>
+                    <OPTION value="us">United States</OPTION>
+                    <OPTION value="ch">Switzerland</OPTION>
+                </SELECT>
+            </TD>
+        </TR>
+    </TABLE>
+ 
+
+        <button type="submit">Create</button>
+        
+
+	  <div id="hiddenFields">
+	  <input type="hidden" id="action" name="action" value="remoteconfig_submit">
+<input type="hidden" id="appmode" name="appmode" value="">
+<input type="hidden" id="mode" name="mode" value="">
+<input type="hidden" id="nextpage" name="nextpage" value="localconfig_render">
+	  </div>
+	  
+	  </form>
+	  </fieldset>
+	  </div>
+		<div style="text-align:center" class="iLayer" id="idcopyright" title="%id%">	
+			<div class="iFooter">&copy;2015 Wiring Virtual & Real World...</div>
+		</div>
+    </body>
+</html>
