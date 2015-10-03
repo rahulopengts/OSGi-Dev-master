@@ -61,4 +61,9 @@ public interface IHttpHandlers {
 	public static String DELIMITER_HIDDENFIELD_MODE	=	"%mode%";
 	public static String DELIMITER_HIDDENFIELD_NEXTPAGE	=	"%nextpage%";
 	
+	public static String DELIMITER_REMOTECONDATTYPESLIST	=	"%remotecondatatypeslist%";
+	public static String DELIMITER_DATATYPENAME				=	"%datatypenames%";
+	public static String DELIMITER_DATATYPEID				=	"%datatypeid%";
+
+	
 }

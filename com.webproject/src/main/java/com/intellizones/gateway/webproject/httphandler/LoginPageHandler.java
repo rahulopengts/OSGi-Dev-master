@@ -3,6 +3,7 @@ package com.intellizones.gateway.webproject.httphandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.intellizones.gateway.webproject.exception.AppException;
 import com.intellizones.gateway.webproject.util.ApplicationDataHolder;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
@@ -40,10 +41,10 @@ public class LoginPageHandler extends AbstractHttpRequestHandler {
 			if(password!=null && password.equals(configPwd) ){
 				
 			} else {
-				throw new Exception("User and Password are not valid");
+				throw new AppException("User and Password are not valid");
 			}
 		} else {
-			throw new Exception("User and Password are not valid");
+			throw new AppException("User and Password are not valid");
 		}
 		
 		ApplicationSessionManager.createNewSession(req, resp);
