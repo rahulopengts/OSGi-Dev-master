@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 
 import com.intellizones.gateway.webproject.datatypes.DataTypes;
+import com.intellizones.gateway.webproject.datatypes.RemoteConnTypes;
 import com.intellizones.gateway.webproject.dto.ConnectionConfigDTO;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
@@ -17,8 +18,9 @@ import com.intellizones.gateway.webproject.util.ApplicationUtil;
 public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 
 	private String CURRENT_PAGE_TEMPLATE	=	"template_remoteconfig";
-	private String TEMPLATE_REMOTECONNDATATYPES	=	"template_remoteconndatatypes";
+	private String TEMPLATE_FIELDDATATYPES	=	"template_fielddatatypes";
 	
+	//private String TEMPLATE_REMOTECONNDATATYPES	=	"template_remoteconndatatypes";
 	@Override
 	public void handlePageRenderRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
@@ -28,23 +30,9 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 		setAppMode("");
 		setMode("");
 		setNextPage(IHttpHandlers.PAGE_LOCAL_RENDER);
-		String remoteConnDataTypeOption	=	ApplicationUtil.getTemplate(TEMPLATE_REMOTECONNDATATYPES);
-		StringBuffer	remoteConnDataTypeSB	=	new StringBuffer();
-		//RemoteConnTypes	remoteConnTypes[]	=	RemoteConnTypes.values();
-		 for (DataTypes r : DataTypes.values()) {
-			 String value	=	r.toString();
-			 String tempValue	=	null;
-			 
-			 tempValue	=	StringUtils.replace(remoteConnDataTypeOption, IHttpHandlers.DELIMITER_DATATYPENAME, value);
-			 tempValue	=	StringUtils.replace(tempValue, IHttpHandlers.DELIMITER_DATATYPEID, value);			    		 
-		     System.out.println(tempValue);
-		     remoteConnDataTypeSB.append(tempValue);
-		 }
 
-		 ApplicationUtil.printDebugMessage(this.getClass().getSimpleName()," OPTIONS : "+remoteConnDataTypeSB.toString());
-		 String embeddedChild	=	getEmbeddedchildTemplate();
-		 embeddedChild	=	StringUtils.replace(embeddedChild, IHttpHandlers.DELIMITER_REMOTECONDATTYPESLIST, remoteConnDataTypeSB.toString());
-		 setEmbeddedchildTemplate(embeddedChild);;
+		populateDataTypesDropDown();
+		populateRemoteConnTypesDropDown();
 	}
 
 	@Override
@@ -134,5 +122,45 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 			}
 			
 		}
+	}
+	
+	private void populateDataTypesDropDown(){
+		String remoteConnDataTypeOption	=	ApplicationUtil.getTemplate(TEMPLATE_FIELDDATATYPES);
+		StringBuffer	remoteConnDataTypeSB	=	new StringBuffer();
+		 for (DataTypes r : DataTypes.values()) {
+			 String value	=	r.toString();
+			 String tempValue	=	null;
+			 
+			 tempValue	=	StringUtils.replace(remoteConnDataTypeOption, IHttpHandlers.DELIMITER_DATATYPENAME, value);
+			 tempValue	=	StringUtils.replace(tempValue, IHttpHandlers.DELIMITER_DATATYPEID, value);			    		 
+		     System.out.println(tempValue);
+		     remoteConnDataTypeSB.append(tempValue);
+		 }
+
+		 ApplicationUtil.printDebugMessage(this.getClass().getSimpleName()," OPTIONS : "+remoteConnDataTypeSB.toString());
+		 String embeddedChild	=	getEmbeddedchildTemplate();
+		 embeddedChild	=	StringUtils.replace(embeddedChild, IHttpHandlers.DELIMITER_FIELDDATATYPESLIST, remoteConnDataTypeSB.toString());
+		 setEmbeddedchildTemplate(embeddedChild);;
+		
+	}
+	
+	private void populateRemoteConnTypesDropDown(){
+		String remoteConnDataTypeOption	=	ApplicationUtil.getTemplate(TEMPLATE_FIELDDATATYPES);
+		StringBuffer	remoteConnDataTypeSB	=	new StringBuffer();
+		 for (RemoteConnTypes r : RemoteConnTypes.values()) {
+			 String value	=	r.toString();
+			 String tempValue	=	null;
+			 
+			 tempValue	=	StringUtils.replace(remoteConnDataTypeOption, IHttpHandlers.DELIMITER_DATATYPENAME, value);
+			 tempValue	=	StringUtils.replace(tempValue, IHttpHandlers.DELIMITER_DATATYPEID, value);			    		 
+		     System.out.println(tempValue);
+		     remoteConnDataTypeSB.append(tempValue);
+		 }
+
+		 ApplicationUtil.printDebugMessage(this.getClass().getSimpleName()," OPTIONS : "+remoteConnDataTypeSB.toString());
+		 String embeddedChild	=	getEmbeddedchildTemplate();
+		 embeddedChild	=	StringUtils.replace(embeddedChild, IHttpHandlers.DELIMITER_REMOTECONNDATATYPES, remoteConnDataTypeSB.toString());
+		 setEmbeddedchildTemplate(embeddedChild);;
+		
 	}
 }

@@ -3,6 +3,9 @@ package com.intellizones.gateway.webproject.httphandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.intellizones.gateway.webproject.datatypes.DataTypes;
 import com.intellizones.gateway.webproject.exception.AppException;
 import com.intellizones.gateway.webproject.util.ApplicationDataHolder;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
@@ -11,6 +14,8 @@ import com.intellizones.gateway.webproject.util.ApplicationUtil;
 public class LoginPageHandler extends AbstractHttpRequestHandler {
 
 	private String	CURRENT_PAGE_TEMPLATE	=	"template_login"; 
+
+	
 	@Override
 	public void handlePageRenderRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
@@ -20,6 +25,7 @@ public class LoginPageHandler extends AbstractHttpRequestHandler {
 		setAppMode("");
 		setMode("");
 		setNextPage(IHttpHandlers.PAGE_REMOTE_RENDER);
+			
 	}
 
 	@Override
@@ -88,5 +94,6 @@ public class LoginPageHandler extends AbstractHttpRequestHandler {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

@@ -10,11 +10,16 @@
           <input type="text" id="connectionId" name="connectionId" required=true>
 
           <label for="mail">Remote Connectivity Type:</label>
-          <input type="text" id="remoteConnType" name="remoteConnType" required=true>
-
-
+          <!-- <input type="text" id="remoteConnType" name="remoteConnType" required=true> -->
+		 <SELECT name="remoteConnType" >
+		 %remoteconndatatypes%
+<!-- <OPTION value="REST">REST</OPTION>
+                    <OPTION value="MQTT">REST</OPTION>
+                    <OPTION value="WebSocket">REST</OPTION>
+ -->                                        
+          </SELECT>
           <label for="mail">REST URL:</label>
-          <input type="text" id="remoteRESTConnURL" name="remoteRESTConnURL" required=true>
+          <input type="url" id="remoteRESTConnURL" name="remoteRESTConnURL" required=true>
           
           <label for="mail">Security Key:</label>
           <input type="text" id="securityKey" name="securityKey" required=true>
@@ -32,7 +37,7 @@
             <TD><INPUT type="text" name="fieldNames" id="fieldNames"/></TD>
             <TD>
                 <SELECT name="dataTypes" >
-                %remotecondatatypeslist%
+                %fielddatatypeslist%
                 <!-- 
                     <OPTION value="String">String</OPTION>
                     <OPTION value="Integer">Integer</OPTION>
@@ -46,7 +51,7 @@
     </TABLE>
  
 
-        <button type="submit">Create</button>
+        <button type="submit">Next...</button>
         
 
 	  <div id="hiddenFields">

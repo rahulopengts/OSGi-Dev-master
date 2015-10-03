@@ -5,11 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.intellizones.gateway.webproject.datatypes.DataTypes;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
 
 public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 
 	private String CURRENT_PAGE_TEMPLATE	=	"template_localconfig";	
+	private String TEMPLATE_FIELDDATATYPES	=	"template_fielddatatypes";
+	
 	@Override
 	public void handlePageRenderRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
@@ -26,7 +29,7 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 		setMode("");
 		setNextPage(IHttpHandlers.PAGE_LOCAL_RENDER);
 
-		
+		populateRemoteFieldDataList();
 		//mainPageTemplate.replaceAll("%embedchild%", embeddedChild);
 //		ApplicationUtil.printDebugMessage(this.toString(), mainPageTemplate);
 //		ApplicationUtil.printDebugMessage(this.toString(), embeddedChild);
@@ -83,6 +86,27 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 		// TODO Auto-generated method stub
 		
 	}
+
+	private void populateRemoteFieldDataList(){
+		String remoteConnDataTypeOption	=	ApplicationUtil.getTemplate(TEMPLATE_FIELDDATATYPES);
+		StringBuffer	remoteConnDataTypeSB	=	new StringBuffer();
+		 for (DataTypes r : DataTypes.values()) {
+			 String value	=	r.toString();
+			 String tempValue	=	null;
+			 
+			 tempValue	=	StringUtils.replace(remoteConnDataTypeOption, IHttpHandlers.DELIMITER_DATATYPENAME, value);
+			 tempValue	=	StringUtils.replace(tempValue, IHttpHandlers.DELIMITER_DATATYPEID, value);			    		 
+		     System.out.println(tempValue);
+		     remoteConnDataTypeSB.append(tempValue);
+		 }
+
+		 ApplicationUtil.printDebugMessage(this.getClass().getSimpleName()," OPTIONS : "+remoteConnDataTypeSB.toString());
+		 String embeddedChild	=	getEmbeddedchildTemplate();
+		 embeddedChild	=	StringUtils.replace(embeddedChild, IHttpHandlers.DELIMITER_REMOTEFIELDDATALIST, remoteConnDataTypeSB.toString());
+		 setEmbeddedchildTemplate(embeddedChild);;
+		
+	}
+
 
 
 }

@@ -3,17 +3,20 @@
         
         
           <legend><span class="number">1</span>Information</legend>
-          <label for="name">Connectivity Name:</label>
-          <input type="text" id="profileName" name="profileName" required=true>
+          <label for="name">Device Name:</label>
+          <input type="text" id="deviceName" name="deviceName" required=true>
           
-          <label for="mail">Connectivity ID:</label>
-          <input type="text" id="profileID" name="profileID" required=true>
+          <label for="mail">Device ID:</label>
+          <input type="text" id="deviceId" name="deviceId" required=true>
 
           <label for="mail">Local Connectivity Type:</label>
           <input type="text" id="localConType" name="localConType" required=true>
 
           <label for="mail">Port Name:</label>
           <input type="text" id="portName" name="portName" required=true>
+
+          <label for="mail">Data Size:</label>
+          <input type="number" id="field1" name="field1" required=true>
 
           <label for="mail">Field Mapping:</label>
           <input type="text" id="field1" name="field1" required=true>
@@ -25,22 +28,29 @@
  
     <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
 
-<!-- <TABLE ID="dataTable" border="1" STYLE="border width="300" orange dashed;background color:#F0E68C;table-row width:2;"> -->	
 <TABLE id="dataTable" width="350px" border="1">
+ <tr>
+    <th>Field Id</th>
+    <th>Field From</th>
+    <th>Field To</th>
+
+  </tr>
         <TR>
             <TD><INPUT type="checkbox" name="chk" id="chk"/></TD>
-            <TD><INPUT type="text" name="fieldNames" id="fieldNames"/></TD>
             <TD>
                 <SELECT name="dataTypes" >
-<!--  			    <OPTION value="String">String</OPTION>
+			    <!-- 
+			    <OPTION value="String">String</OPTION>
                     <OPTION value="Integer">Integer</OPTION>
                     <OPTION value="Double">Double</OPTION>
                     <OPTION value="Boolean">Boolean</OPTION>
                     <OPTION value="Char">Char</OPTION>
-                    -->
-                    %remotecondatatypeslist%
+                 -->
+                %remotefielddatalist%
                 </SELECT>
             </TD>
+			<TD><INPUT type="text" name=jsonKey" id="jsonKey"/></TD>
+	
         </TR>
     </TABLE>
  
