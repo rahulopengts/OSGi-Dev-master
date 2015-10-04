@@ -12,7 +12,7 @@ import com.intellizones.gateway.webproject.dto.PersonDTO;
 import com.intellizones.gateway.webproject.httphandler.IHttpHandlers;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
-import com.intellizones.gateway.webproject.util.ApplictionFactory;
+import com.intellizones.gateway.webproject.util.ApplicationFactory;
 import com.intellizones.gateway.webproject.util.IINtelliZones;
 
 public class IntellizonesServlet  extends HttpServlet implements IINtelliZones{
@@ -32,14 +32,14 @@ public class IntellizonesServlet  extends HttpServlet implements IINtelliZones{
 				
 			}
 			ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(), "Action is "+action);
-			handler	=	ApplictionFactory.getInstance().getHandlerClass(action);
+			handler	=	ApplicationFactory.getInstance().getHandlerClass(action);
 			handler.handleCommonRequest(req, resp,handler,action);
 			handler.handleRequest(req, resp, handler, action);
 			
 			//If the action was for Submit, then after submit request is processed
 			//we have to call for rendering next page.
 			if(action!=null && action.contains(IHttpHandlers.SUBMIT)){
-				handler	=	ApplictionFactory.getInstance().getHandlerClass(nextAction);				
+				handler	=	ApplicationFactory.getInstance().getHandlerClass(nextAction);				
 				handler.handleCommonRequest(req, resp,handler,nextAction);
 				handler.handleRequest(req,resp,handler,nextAction);				
 			}

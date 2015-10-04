@@ -44,6 +44,6 @@
         <module>core</module>
 		<module>myosgi</module>
 		<module>com.wabapp</module>
-    <module>com.dataparsers</module>
+    <module>com.datastoremanager</module>
   </modules>
 </project>
