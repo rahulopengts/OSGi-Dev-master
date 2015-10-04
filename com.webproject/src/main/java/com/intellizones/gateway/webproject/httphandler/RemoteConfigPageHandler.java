@@ -41,6 +41,7 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 		// TODO Auto-generated method stub
 		Map<String, String[]> map = req.getParameterMap();
 		ConnectionConfigDTO	connectionConfigDTO	=	new ConnectionConfigDTO();
+		
 		ApplicationSessionManager.removeFromSession(req,ApplicationSessionManager.REMOTECONFIGCONN);
 		
 		String[] fieldNames = null;
@@ -75,6 +76,7 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 		
 		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
 		ApplicationSessionManager.createNewSession(req, resp);
+		connectionConfigDTO.setTenantID("MyTenant");
 		ApplicationSessionManager.putInSession(req, ApplicationSessionManager.REMOTECONFIGCONN, connectionConfigDTO);
 	}
 

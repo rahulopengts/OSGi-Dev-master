@@ -114,8 +114,9 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Activator>com.intellizones.gateway.webproject.Activator</Bundle-Activator>												
-                        <Private-Package>com.intellizones.gateway.webproject.*</Private-Package>
-                        <Export-Package>!*</Export-Package>
+						<Private-Package>com.intellizones.gateway.webproject.*</Private-Package>
+                        <!-- <Export-Package>!*</Export-Package>-->
+                        <Export-Package>com.intellizones.gateway.webproject.dto</Export-Package>
                         <Embed-Dependency>dependencies</Embed-Dependency>
                         <Embed-Dependency>commons-io,gson,commons-lang</Embed-Dependency>
                     </instructions>

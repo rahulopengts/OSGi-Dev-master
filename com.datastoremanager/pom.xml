@@ -29,6 +29,12 @@
 	<artifactId>gson</artifactId>
 	<version>2.3.1</version>
 </dependency>
+
+<dependency>
+	<groupId>com.webproject</groupId>
+	<artifactId>com.webproject</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</dependency>
     
         <dependency>
             <groupId>com.intellizones.gateway</groupId>
@@ -76,6 +82,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Activator>org.myosgi.MyActivator</Bundle-Activator>												                      
+                        <Import-Package>com.intellizones.gateway.webproject.dto</Import-Package>
                         <Export-Package>org.myosgi.*</Export-Package>
 						<Embed-Dependency>gson</Embed-Dependency>                        
                     </instructions>

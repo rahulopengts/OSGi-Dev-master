@@ -88,6 +88,7 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 		}
 		
 		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
+		connectionConfigDTO.setPrimaryKey(connectionConfigDTO.getLocDeviceId());
 		//ApplicationSessionManager.createNewSession(req, resp);
 		ApplicationSessionManager.putInSession(req, ApplicationSessionManager.REMOTECONFIGCONN, connectionConfigDTO);		
 	}
