@@ -35,9 +35,6 @@ public class ApplicationSessionManager {
 
 	public static Object getFromSession(HttpServletRequest req,String key) throws Exception{
 		HttpSession session	=	req.getSession(false);
-		if(session.isNew()){
-			throw new Exception("Invalid Session Object");
-		}	
 		return session.getAttribute(key);
 	}
 	

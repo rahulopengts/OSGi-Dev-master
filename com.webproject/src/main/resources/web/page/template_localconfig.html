@@ -4,19 +4,19 @@
         
           <legend><span class="number">1</span>Information</legend>
           <label for="name">Device Name:</label>
-          <input type="text" id="deviceName" name="deviceName" required=true>
+          <input type="text" id="locDeviceName" name="locDeviceName" required=true>
           
           <label for="mail">Device ID:</label>
-          <input type="text" id="deviceId" name="deviceId" required=true>
+          <input type="text" id="locDeviceId" name="locDeviceId" required=true>
 
           <label for="mail">Local Connectivity Type:</label>
-          <input type="text" id="localConType" name="localConType" required=true>
+          <input type="text" id="locConnType" name="locConnType" required=true>
 
           <label for="mail">Port Name:</label>
-          <input type="text" id="portName" name="portName" required=true>
+          <input type="text" id="locPortName" name="locPortName" required=true>
 
           <label for="mail">Data Size:</label>
-          <input type="number" id="field1" name="field1" required=true>
+          <input type="number" id="locDataSize" name="locDataSize" required=true>
 
           <label for="mail">Field Mapping:</label>
           <input type="text" id="field1" name="field1" required=true>
@@ -24,9 +24,9 @@
         
  
 
-<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
+<INPUT type="button" value="Add Row" onclick="addRowLocal('dataTable')" />
  
-    <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
+    <INPUT type="button" value="Delete Row" onclick="deleteRowLocal('dataTable')" />
 
 <TABLE id="dataTable" width="350px" border="1">
  <tr>
@@ -38,7 +38,7 @@
         <TR>
             <TD><INPUT type="checkbox" name="chk" id="chk"/></TD>
             <TD>
-                <SELECT name="dataTypes" >
+                <SELECT name="remoteFieldNames" >
 			    <!-- 
 			    <OPTION value="String">String</OPTION>
                     <OPTION value="Integer">Integer</OPTION>
@@ -49,7 +49,7 @@
                 %remotefielddatalist%
                 </SELECT>
             </TD>
-			<TD><INPUT type="text" name=jsonKey" id="jsonKey"/></TD>
+			<TD><INPUT type="text" name=localFieldNames" id="jsonKey"/></TD>
 	
         </TR>
     </TABLE>

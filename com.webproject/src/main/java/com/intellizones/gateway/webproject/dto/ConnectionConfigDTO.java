@@ -43,9 +43,6 @@ public class ConnectionConfigDTO extends CommonDTO {
 		return fieldIDAndTypeMap;
 	}
 	
-	public void setFieldIDAndTypeMap(HashMap<String, String> fieldIDAndTypeMap) {
-		this.fieldIDAndTypeMap = fieldIDAndTypeMap;
-	}
 	
 	public void addFieldAndDataType(String key,String value){
 		this.fieldIDAndTypeMap.put(key, value);
@@ -61,5 +58,60 @@ public class ConnectionConfigDTO extends CommonDTO {
 	private  String securityKey							=	null;
 	private HashMap<String, String>	fieldIDAndTypeMap	=	null;
 	
+	private  String locDeviceName						=	null;
+	public String getLocPortName() {
+		return locPortName;
+	}
+	public void setLocPortName(String locPortName) {
+		this.locPortName = locPortName;
+	}
+	public void setRemoteRESTConnURL(String remoteRESTConnURL) {
+		this.remoteRESTConnURL = remoteRESTConnURL;
+	}
+	public String getLocDeviceName() {
+		return locDeviceName;
+	}
+	public void setLocDeviceName(String locDeviceName) {
+		this.locDeviceName = locDeviceName;
+	}
+	public String getLocDeviceId() {
+		return locDeviceId;
+	}
+	public void setLocDeviceId(String locDeviceId) {
+		this.locDeviceId = locDeviceId;
+	}
+	public String getLocConnType() {
+		return locConnType;
+	}
+	public void setLocConnType(String locConnType) {
+		this.locConnType = locConnType;
+	}
+	public String getLocDataSize() {
+		return locDataSize;
+	}
+	public void setLocDataSize(String locDataSize) {
+		this.locDataSize = locDataSize;
+	}
+	public HashMap<String, String> getLocAndRemoteFieldMap() {
+		return locAndRemoteFieldMap;
+	}
+	public void setLocAndRemoteFieldMap(HashMap<String, String> locAndRemoteFieldMap) {
+		this.locAndRemoteFieldMap = locAndRemoteFieldMap;
+	}
+
+	private  String locDeviceId						=	null;
+	private  String locConnType						=	null;
+	private  String locPortName						=	null;
+	private  String locDataSize						=	null;
+	
+	private HashMap<String, String>	locAndRemoteFieldMap	=	null;
+	
+	public void addLocAndRemoteFieldMap(String key,String value){
+		this.locAndRemoteFieldMap.put(key, value);
+	}
+	
+	public String getLocAndRemoteFieldMap(String fieldName){
+		return this.locAndRemoteFieldMap.get(fieldName);
+	}
 	
 }
