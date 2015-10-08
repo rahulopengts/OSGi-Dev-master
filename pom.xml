@@ -45,5 +45,8 @@
 		<module>myosgi</module>
 		<module>com.wabapp</module>
     <module>com.datastoremanager</module>
+    <module>com.jsonhandler</module>
+    <module>com.dataobjects</module>
+    <module>com.datahandler</module>
   </modules>
 </project>

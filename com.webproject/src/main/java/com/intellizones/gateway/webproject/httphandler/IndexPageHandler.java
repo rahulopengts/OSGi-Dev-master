@@ -3,6 +3,7 @@ package com.intellizones.gateway.webproject.httphandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.intellizones.gateway.dataobjects.IDataObjects;
 import com.intellizones.gateway.webproject.HttpRequestHandler;
 
 public class IndexPageHandler extends AbstractHttpRequestHandler {
@@ -28,7 +29,7 @@ public class IndexPageHandler extends AbstractHttpRequestHandler {
 
 	@Override
 	public void handlePageSubmitRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
-			String actionId) {
+			String actionId,IDataObjects dataObject) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -62,9 +63,10 @@ public class IndexPageHandler extends AbstractHttpRequestHandler {
 	}
 
 	@Override
-	public void validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
+	public IDataObjects validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

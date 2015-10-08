@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
+import com.intellizones.gateway.dataobjects.IDataObjects;
+import com.intellizones.gateway.jsonhandler.IDataFormatHandler;
+import com.intellizones.gateway.jsonhandler.JSONDataFormatHandler;
 import com.intellizones.gateway.webproject.datatypes.DataTypes;
 import com.intellizones.gateway.webproject.datatypes.RemoteConnTypes;
-import com.intellizones.gateway.webproject.dto.ConnectionConfigDTO;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
 
@@ -37,46 +40,13 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 
 	@Override
 	public void handlePageSubmitRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
-			String actionId) throws Exception {
+			String actionId,IDataObjects dataObject) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, String[]> map = req.getParameterMap();
-		ConnectionConfigDTO	connectionConfigDTO	=	new ConnectionConfigDTO();
-		
+		ConnectionConfigDTO	connectionConfigDTO	=	(ConnectionConfigDTO)dataObject;
 		ApplicationSessionManager.removeFromSession(req,ApplicationSessionManager.REMOTECONFIGCONN);
-		
-		String[] fieldNames = null;
-		String[] dataTypes = null;
-		
-		//ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),"Subitted");
-		for (Entry<String, String[]> entry : map.entrySet()) {
-		    String name = entry.getKey();
-		    String [] values	=	entry.getValue();
-		    
-		    if(name.equals("connectionId")){
-		    	connectionConfigDTO.setConnectionId(req.getParameter("connectionId"));
-		    } else if(name.equals("connectionName")){
-		    	connectionConfigDTO.setConnectionName(req.getParameter("connectionName"));
-		    } else if(name.equals("remoteConnType")){
-		    	connectionConfigDTO.setRemoteConnType(req.getParameter("remoteConnType"));
-		    } else if(name.equals("remoteRESTConnURL")){
-		    	connectionConfigDTO.setRemoteConnType(req.getParameter("remoteRESTConnURL"));
-		    } else if(name.equals("securityKey")){
-		    	connectionConfigDTO.setSecurityKey(req.getParameter("securityKey"));
-		    	ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), req.getParameter("securityKey"));
-		    } 
-		    
-		    if(name.equals("fieldNames")){
-		    	fieldNames	=	values;
-		    } else if(name.equals("dataTypes")){
-		    	dataTypes	=	values;
-		    }
-		    
-		    ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),name + ": " + Arrays.toString(values));
-		}
-		
-		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
 		ApplicationSessionManager.createNewSession(req, resp);
-		connectionConfigDTO.setTenantID("MyTenant");
+		//connectionConfigDTO.setTenantID("MyTenant");
 		ApplicationSessionManager.putInSession(req, ApplicationSessionManager.REMOTECONFIGCONN, connectionConfigDTO);
 	}
 
@@ -110,10 +80,54 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 	}
 
 	@Override
-	public void validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
+	public IDataObjects validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
 		// TODO Auto-generated method stub
+		Map<String, String[]> map = req.getParameterMap();
+		ConnectionConfigDTO	connectionConfigDTO	=	new ConnectionConfigDTO();
 		
+		ApplicationSessionManager.removeFromSession(req,ApplicationSessionManager.REMOTECONFIGCONN);
+		
+		String[] fieldNames = null;
+		String[] dataTypes = null;
+		
+		//ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),"Subitted");
+		for (Entry<String, String[]> entry : map.entrySet()) {
+		    String name = entry.getKey();
+		    String [] values	=	entry.getValue();
+		    
+		    if(name.equals("connectionId")){
+		    	connectionConfigDTO.setConnectionId(req.getParameter("connectionId"));
+		    } else if(name.equals("connectionName")){
+		    	connectionConfigDTO.setConnectionName(req.getParameter("connectionName"));
+		    } else if(name.equals("remoteConnType")){
+		    	connectionConfigDTO.setRemoteConnType(req.getParameter("remoteConnType"));
+		    } else if(name.equals("remoteRESTConnURL")){
+		    	connectionConfigDTO.setRemoteConnType(req.getParameter("remoteRESTConnURL"));
+		    } else if(name.equals("securityKey")){
+		    	connectionConfigDTO.setSecurityKey(req.getParameter("securityKey"));
+		    	ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), req.getParameter("securityKey"));
+		    } else if(name.equals("jsonString")){
+		    	connectionConfigDTO.setJsonString(req.getParameter("jsonString"));
+		    	IDataFormatHandler	jsonHandler	=	new JSONDataFormatHandler();
+		    	boolean isValid	=	jsonHandler.isValidFormat(connectionConfigDTO);
+		    	ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), "Validation "+isValid+req.getParameter("jsonString"));
+		    } 
+		    
+		    
+		    if(name.equals("fieldNames")){
+		    	fieldNames	=	values;
+		    } else if(name.equals("dataTypes")){
+		    	dataTypes	=	values;
+		    }
+		    connectionConfigDTO.setTenantID("MyTenant");		    
+		    ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),name + ": " + Arrays.toString(values));
+		}
+		
+		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
+		connectionConfigDTO.setTenantID("MyTenant");
+
+		return connectionConfigDTO;
 	}
 	
 	private void setFieldValues(ConnectionConfigDTO connectionConfigDTO,String[] fieldNames,String[] dataTypes){

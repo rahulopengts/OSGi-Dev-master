@@ -1,4 +1,4 @@
-	  
+ 
         <h1>System Remote Connection Configuration</h1>
         
         
@@ -11,6 +11,10 @@
 
           <label for="mail">Remote Connectivity Type:</label>
           <!-- <input type="text" id="remoteConnType" name="remoteConnType" required=true> -->
+          
+          <label for="mail">JSON Message Format</label>
+		  
+		  <textarea name="jsonString" id="jsonString" cols="25" rows="7"></textarea> 
 		 <SELECT name="remoteConnType" >
 		 %remoteconndatatypes%
 <!-- <OPTION value="REST">REST</OPTION>
@@ -52,11 +56,3 @@
  
 
         <button type="submit">Next...</button>
-        
-
-	  <div id="hiddenFields">
-	  <input type="hidden" id="action" name="action" value="remoteconfig_submit">
-<input type="hidden" id="appmode" name="appmode" value="">
-<input type="hidden" id="mode" name="mode" value="">
-<input type="hidden" id="nextpage" name="nextpage" value="localconfig_render">
-	  </div>

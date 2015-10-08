@@ -1,6 +1,8 @@
 package com.intellizones.gateway.datastoremanager;
 
-import com.intellizones.gateway.webproject.dto.ConnectionConfigDTO;
+import java.util.HashMap;
+
+import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
 
 public interface IDataStoreManager {
 

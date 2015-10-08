@@ -17,7 +17,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.intellizones.gateway.webproject.util.ApplicationUtil;
+//import com.intellizones.gateway.webproject.util.ApplicationUtil;
 
 public class XMLDataParser {
 
@@ -46,6 +46,7 @@ public class XMLDataParser {
 		}
 	}
 	
+	/*
 	public void createDocument(String profileId,String profileName){
 		try {
 			 
@@ -319,6 +320,7 @@ public class XMLDataParser {
 		  
 		  return profileDataMap;
 	  }
+	  */
 		public static void main(String str[]){
 			try{
 				/*
@@ -336,9 +338,9 @@ public class XMLDataParser {
 //				x.initEditDocument();
 //				x.readAndUpdateProfileDataIntoMemory(null,"eve");
 				x.initDocument();
-				x.createDocument("morning","morning");
+				//x.createDocument("morning","morning");
 				//x.addChileNode("SwitchTTT","Node01"+"~"+">[mosquitto:/raspberry:command:ON:OL1N0L2N1S1100000000");
-				x.addChileNode("primaryKey","deviceLoc","Pune");
+				//x.addChileNode("primaryKey","deviceLoc","Pune");
 				System.out.println("\n Output : "+x.toString());
 				//x.writeToFile();
 			} catch (Exception e){

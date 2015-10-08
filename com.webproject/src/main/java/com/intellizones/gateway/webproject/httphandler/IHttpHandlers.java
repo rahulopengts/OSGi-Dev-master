@@ -3,6 +3,8 @@ package com.intellizones.gateway.webproject.httphandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.intellizones.gateway.dataobjects.IDataObjects;
+
 public interface IHttpHandlers {
 
 	public void intiHandler(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId) throws Exception ;
@@ -13,7 +15,7 @@ public interface IHttpHandlers {
 	
 	public void handlePageRenderRequest(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId) throws Exception ;
 	
-	public void handlePageSubmitRequest(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId) throws Exception ;
+	public void handlePageSubmitRequest(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId,IDataObjects dataObject) throws Exception ;
 	
 	public void modifyMainPageTemplate(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId) throws Exception ;
 	
@@ -27,7 +29,7 @@ public interface IHttpHandlers {
 
 	public void handleError(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId, Exception ex) throws Exception ;
 	
-	public void validateRequest(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId) throws Exception ;
+	public IDataObjects validateRequest(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId) throws Exception;
 	
 
 	

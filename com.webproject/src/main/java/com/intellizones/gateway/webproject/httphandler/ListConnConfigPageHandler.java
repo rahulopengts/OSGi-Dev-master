@@ -3,6 +3,8 @@ package com.intellizones.gateway.webproject.httphandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.intellizones.gateway.dataobjects.IDataObjects;
+
 public class ListConnConfigPageHandler extends AbstractHttpRequestHandler {
 
 	@Override
@@ -14,7 +16,7 @@ public class ListConnConfigPageHandler extends AbstractHttpRequestHandler {
 
 	@Override
 	public void handlePageSubmitRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
-			String actionId) throws Exception {
+			String actionId,IDataObjects dataObject) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
@@ -48,9 +50,10 @@ public class ListConnConfigPageHandler extends AbstractHttpRequestHandler {
 	}
 
 	@Override
-	public void validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
+	public IDataObjects validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

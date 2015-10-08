@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.intellizones.gateway.dataobjects.IDataObjects;
+import com.intellizones.gateway.webproject.exception.AppValidationException;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
 
 public abstract class AbstractHttpRequestHandler implements IHttpHandlers {
@@ -108,21 +110,14 @@ public abstract class AbstractHttpRequestHandler implements IHttpHandlers {
 			handler.createFinalPageTemplate(req, resp, handler, actionId);
 			handler.writeHttpResponse(req, resp, null, actionId);
 		} else if(actionId.contains(IHttpHandlers.SUBMIT)){
-			//ApplicationUtil.printDebugMessage(this.toString(),"handleRequest for Submit");
-//			handler.modifyMainPageTemplate(req, resp, handler, actionId);
-//			handler.modifyHiddenFieldPageTemplate(req, resp, handler, actionId);
-//			handler.modifyEmbeddedChildPageTemplate(req, resp, handler, actionId);			
-			
 			doCommonValidtions(req, resp,handler,actionId);
-			handler.validateRequest(req, resp, handler, actionId);
-			handler.handlePageSubmitRequest(req, resp,handler,actionId);
-//			actionId	=	req.getParameter(IHttpHandlers.HIDDEN_NEXTPAGE);
-//			handler.handleRequest(req,resp,handler,actionId);
-			//handler.createFinalPageTemplate(req, resp, handler, actionId);
-			//handler.writeHttpResponse(req, resp, null, actionId);
+			IDataObjects dataObject	=	handler.validateRequest(req, resp, handler, actionId);
+			handler.handlePageSubmitRequest(req, resp,handler,actionId,dataObject);
 		} 
+		} catch (AppValidationException e){
+			throw e;
+		
 		} catch (Exception e){
-			
 			e.printStackTrace();
 			throw e;
 		}
@@ -145,26 +140,18 @@ public abstract class AbstractHttpRequestHandler implements IHttpHandlers {
 		hiddenFieldTemplate	=	StringUtils.replace(hiddenFieldTemplate,"%nextpage%",getNextPage());
 		mainPageTemplate	=	StringUtils.replace(mainPageTemplate, "%embedchild%", embeddedchildTemplate);
 		mainPageTemplate	=	StringUtils.replace(mainPageTemplate, "%hiddenfields%", hiddenFieldTemplate);
-		
-		//ApplicationUtil.printDebugMessage(this.getClass().getName()+" Final Template ", mainPageTemplate);
 	}
 	
 	
 	@Override
 	public void handleError(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId, Exception ex) throws Exception {
 		String mainPage	=	ApplicationUtil.getTemplate(IHttpHandlers.PAGE_MAINPAGE);
-		//ApplicationUtil.printDebugMessage(this.toString(),mainPage);
 		setMainPageTemplate(mainPage);
 
 		String hiddenField	=	ApplicationUtil.getTemplate(IHttpHandlers.PAGE_HIDDEN_FIELD);
-		//ApplicationUtil.printDebugMessage(this.toString(),mainPage);
 		setHiddenFieldTemplate(hiddenField);
-		
 		embeddedchildTemplate	=	ApplicationUtil.getTemplate(PAGE_ERROR);
 		embeddedchildTemplate	=	StringUtils.replace(embeddedchildTemplate, "%errormessage%", ex.getMessage());		
-		
-		
-		
 	}
 
 	public void doCommonValidtions(HttpServletRequest	req,HttpServletResponse resp,IHttpHandlers handler,String actionId) throws Exception {

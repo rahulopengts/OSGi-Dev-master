@@ -3,9 +3,7 @@ package com.intellizones.gateway.webproject.httphandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.intellizones.gateway.webproject.datatypes.DataTypes;
+import com.intellizones.gateway.dataobjects.IDataObjects;
 import com.intellizones.gateway.webproject.exception.AppException;
 import com.intellizones.gateway.webproject.util.ApplicationDataHolder;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
@@ -30,7 +28,7 @@ public class LoginPageHandler extends AbstractHttpRequestHandler {
 
 	@Override
 	public void handlePageSubmitRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
-			String actionId) throws Exception {
+			String actionId,IDataObjects dataObject) throws Exception {
 		// TODO Auto-generated method stub
 		String userName		=	req.getParameter("username");
 		String password		=	req.getParameter("password");
@@ -89,10 +87,10 @@ public class LoginPageHandler extends AbstractHttpRequestHandler {
 	}
 
 	@Override
-	public void validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
+	public IDataObjects validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 

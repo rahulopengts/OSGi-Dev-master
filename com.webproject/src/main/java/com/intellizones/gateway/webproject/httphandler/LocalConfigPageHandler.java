@@ -4,15 +4,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.intellizones.gateway.webproject.dto.ConnectionConfigDTO;
+import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
+import com.intellizones.gateway.dataobjects.IDataObjects;
+import com.intellizones.gateway.datastoremanager.IDataStoreManager;
+import com.intellizones.gateway.datastoremanager.XMLDataStoreManager;
 import com.intellizones.gateway.webproject.exception.AppException;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
@@ -33,7 +36,7 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 //		mainPageTemplate	=	StringUtils.replace(mainPageTemplate, "%embedchild%", embeddedChild);
 		
 		ApplicationUtil.printDebugMessage(this.getClass().getName(), "In RenderRequest for LocalConfig");
-		setAction(IHttpHandlers.PAGE_REMOTE_SUBMIT);
+		setAction(IHttpHandlers.PAGE_LOCAL_SUBMIT);
 		setAppMode("");
 		setMode("");
 		setNextPage(IHttpHandlers.PAGE_LOCAL_RENDER);
@@ -50,7 +53,7 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 
 	@Override
 	public void handlePageSubmitRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
-			String actionId) throws Exception {
+			String actionId,IDataObjects dataObject) throws Exception {
 		// TODO Auto-generated method stub
 		
 		ConnectionConfigDTO connectionConfigDTO	=	(ConnectionConfigDTO)ApplicationSessionManager.getFromSession(req, ApplicationSessionManager.REMOTECONFIGCONN);
@@ -90,7 +93,10 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
 		connectionConfigDTO.setPrimaryKey(connectionConfigDTO.getLocDeviceId());
 		//ApplicationSessionManager.createNewSession(req, resp);
-		ApplicationSessionManager.putInSession(req, ApplicationSessionManager.REMOTECONFIGCONN, connectionConfigDTO);		
+		ApplicationSessionManager.putInSession(req, ApplicationSessionManager.REMOTECONFIGCONN, connectionConfigDTO);
+		//IDataStoreManager
+		IDataStoreManager	xmlDataStore	=	new XMLDataStoreManager();
+		xmlDataStore.persistDataObject(connectionConfigDTO, connectionConfigDTO.getPrimaryKey());
 	}
 
 	@Override
@@ -128,9 +134,10 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 	}
 
 	@Override
-	public void validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
+	public IDataObjects validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

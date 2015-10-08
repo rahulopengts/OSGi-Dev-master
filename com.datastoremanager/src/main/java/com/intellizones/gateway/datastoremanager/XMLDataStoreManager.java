@@ -1,12 +1,13 @@
 package com.intellizones.gateway.datastoremanager;
 
-import com.intellizones.gateway.webproject.dto.ConnectionConfigDTO;
+import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
 
 public class XMLDataStoreManager implements IDataStoreManager {
 
 	@Override
 	public boolean persistDataObject(ConnectionConfigDTO connectionConfigDTO, String primaryKey) {
 		// TODO Auto-generated method stub
+		System.out.println("\n Stored Data Successfully");
 		return false;
 	}
 

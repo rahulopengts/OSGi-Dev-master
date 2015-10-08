@@ -33,5 +33,9 @@ public class AppException extends Exception{
 	public AppException(String message){
 		errorMessage	=	message;
 	}
-	
+
+	public AppException(){
+		
+	}
+
 }

@@ -8,11 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.intellizones.gateway.webproject.dto.PersonDTO;
+import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
+import com.intellizones.gateway.dataobjects.TestDTO;
+import com.intellizones.gateway.datastoremanager.IDataStoreManager;
+import com.intellizones.gateway.datastoremanager.XMLDataStoreManager;
+import com.intellizones.gateway.jsonhandler.IDataFormatHandler;
+import com.intellizones.gateway.jsonhandler.JSONDataFormatHandler;
 import com.intellizones.gateway.webproject.httphandler.IHttpHandlers;
-import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
-import com.intellizones.gateway.webproject.util.ApplicationUtil;
 import com.intellizones.gateway.webproject.util.ApplicationFactory;
+import com.intellizones.gateway.webproject.util.ApplicationUtil;
 import com.intellizones.gateway.webproject.util.IINtelliZones;
 
 public class IntellizonesServlet  extends HttpServlet implements IINtelliZones{
@@ -23,7 +27,11 @@ public class IntellizonesServlet  extends HttpServlet implements IINtelliZones{
 		IHttpHandlers	handler	=	null;
 		String action	=	null;
 		try{
-			
+			TestDTO	test	=	new TestDTO();
+			IDataStoreManager xml	=	new XMLDataStoreManager();
+			IDataFormatHandler dataFormat	=	new JSONDataFormatHandler();
+			//dataFormat.isValidFormat(new ConnectionConfigDTO());
+			System.out.println("\n YES THIS IS INSTANTIATED THREEEEEEEE");
 			action	=	req.getParameter(IHttpHandlers.HIDDEN_ACTION);
 			String nextAction	=	req.getParameter(IHttpHandlers.HIDDEN_NEXTPAGE);				
 			if(action==null){
@@ -52,6 +60,8 @@ public class IntellizonesServlet  extends HttpServlet implements IINtelliZones{
 			} catch (Exception e1){
 				
 			}
+		} catch (Throwable t){
+			t.printStackTrace();
 		}
 	
 	}
@@ -84,13 +94,13 @@ public class IntellizonesServlet  extends HttpServlet implements IINtelliZones{
 		}
 	}
 	protected void handleInitialPage(HttpServletRequest req, HttpServletResponse resp,String actionId) throws ServletException, IOException {
-		PersonDTO	personDTO	=	new PersonDTO();
-		personDTO.setFirtName("Rahul");
-		personDTO.setLastName("Poddar");
-		
-		String json = new Gson().toJson(personDTO);
-        resp.setContentType("application/json");
-        resp.getWriter().write(json);
+//		PersonDTO	personDTO	=	new PersonDTO();
+//		personDTO.setFirtName("Rahul");
+//		personDTO.setLastName("Poddar");
+//		
+//		String json = new Gson().toJson(personDTO);
+//        resp.setContentType("application/json");
+//        resp.getWriter().write(json);
         
 	}
 }

@@ -11,7 +11,7 @@
         <link href='http://fonts.godasdasogleapis.com/css?family=Nunito:800,800' rel='stylesheet' type='text/css'>
         
     <SCRIPT language="javascript">
-        function addRow(tableID) {
+        function addRowLocal(tableID) {
  
             var table = document.getElementById(tableID);
  
@@ -40,7 +40,7 @@
             }
         }
  
-        function deleteRow(tableID) {
+        function deleteRowLocal(tableID) {
             try {
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
@@ -102,7 +102,8 @@
           <input type="text" id="field1" name="field1" required=true>
                     
         
- 
+<textarea cols="25" rows="7"></textarea> 
+        <br /> 
 
 <INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
  
