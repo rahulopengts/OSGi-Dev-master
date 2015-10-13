@@ -1,4 +1,4 @@
-package com.intellizones.gateway.webproject.util;
+package com.intellizones.gateway.datahandler.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,11 +11,6 @@ public class ApplicationDataHolder {
 
 	private String USERCONFIGFILENAME	=	"user.config";
 	private String 	GATEWAYHOME	=	"GATEWAYHOME";
-	private String 	DATABASEFOLDER="dbfoldername";
-	private String 	JSONFILEFOLDERNAMES="json";
-	private String 	XMLFILEFOLDERNAMES	=	"xml";
-	private String  MAPPINGFOLENAME	= "mappingfilename";	
-
 	
 	private HashMap<String, String> configData	=	null;
 	

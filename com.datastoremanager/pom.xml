@@ -23,6 +23,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+	<groupId>org.json</groupId>
+	<artifactId>json</artifactId>
+	<version>20140107</version>
+</dependency>
         <dependency>
   			<groupId>com.dataobjects</groupId>
   			<artifactId>com.dataobjects</artifactId>
@@ -87,7 +92,7 @@
                         <Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Activator>com.intellizones.gateway.datastoremanager.DataStoreManagerActivator</Bundle-Activator>												                      
 						<Export-Package>com.intellizones.gateway.datastoremanager.*</Export-Package>
-						<Embed-Dependency>gson,com.dataobjects,com.datahandler</Embed-Dependency>                        
+						<Embed-Dependency>gson,com.dataobjects,com.datahandler,json</Embed-Dependency>                        
                     </instructions>
                 </configuration>
             </plugin>

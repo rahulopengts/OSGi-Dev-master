@@ -23,7 +23,12 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    
+        <dependency>
+  			<groupId>com.dataobjects</groupId>
+  			<artifactId>com.dataobjects</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+  			<scope>provided</scope>
+        </dependency>   
 <dependency>
 	<groupId>com.google.code.gson</groupId>
 	<artifactId>gson</artifactId>
@@ -35,6 +40,11 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+<dependency>
+	<groupId>org.json</groupId>
+	<artifactId>json</artifactId>
+	<version>20140107</version>
+</dependency>        
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
@@ -76,7 +86,7 @@
                         <Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Activator>com.intellizones.gateway.datahandler.DataHandlerActivator</Bundle-Activator>												                      
                         <Export-Package>com.intellizones.gateway.datahandler.*</Export-Package>
-						<Embed-Dependency>gson</Embed-Dependency>                        
+						<Embed-Dependency>gson,json,com.dataobjects</Embed-Dependency>                        
                     </instructions>
                 </configuration>
             </plugin>

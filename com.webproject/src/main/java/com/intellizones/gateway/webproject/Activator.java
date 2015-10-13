@@ -76,7 +76,7 @@ public class Activator implements BundleActivator,ServiceTrackerCustomizer {
 		HttpService service = (HttpService) context.getService(reference);
       	try {
       		if (service != null) {
-				service.registerServlet("/hello", new HttpRequestHandler(), null, null);
+				//service.registerServlet("/hello", new HttpRequestHandler(), null, null);
 				service.registerServlet("/init", new IntellizonesServlet(), null, null);
 				service.registerResources("/files", "/web", null);
 				ApplicationDataHolder.getApplicationDataHolder();
