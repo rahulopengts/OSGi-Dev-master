@@ -1,6 +1,5 @@
 package com.intellizones.gateway.webproject.httphandler;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -171,7 +170,7 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 			 
 			 tempValue	=	StringUtils.replace(remoteConnDataTypeOption, IHttpHandlers.DELIMITER_DATATYPENAME, value);
 			 tempValue	=	StringUtils.replace(tempValue, IHttpHandlers.DELIMITER_DATATYPEID, value);			    		 
-		     System.out.println(tempValue);
+		     //System.out.println(tempValue);
 		     remoteConnDataTypeSB.append(tempValue);
 		 }
 
@@ -191,7 +190,7 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 			 
 			 tempValue	=	StringUtils.replace(remoteConnDataTypeOption, IHttpHandlers.DELIMITER_DATATYPENAME, value);
 			 tempValue	=	StringUtils.replace(tempValue, IHttpHandlers.DELIMITER_DATATYPEID, value);			    		 
-		     System.out.println(tempValue);
+		     //System.out.println(tempValue);
 		     remoteConnDataTypeSB.append(tempValue);
 		 }
 

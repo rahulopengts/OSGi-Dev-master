@@ -88,7 +88,7 @@ public static void main (String[] str){
 		while(iterateFinal.hasNext()){
 			String key	=	(String)iterateFinal.next();
 			String value=	(String)h.get(key);
-			System.out.println(key +":"+value);
+			//System.out.println(key +":"+value);
 		}
 		
 		
@@ -144,11 +144,11 @@ public static HashMap<String, String> getHashMap(HashMap<String, Object> dataMap
 	 Iterator it = dataMap.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
-	        System.out.println(pair.getKey() + " = " + pair.getValue());
+	        //System.out.println(pair.getKey() + " = " + pair.getValue());
 	        String key	=	(String)pair.getKey();
 	        Object value	=	pair.getValue();
 	        if(value instanceof HashMap){
-	        	System.out.println("\n Values : As HashMap");
+	        	//System.out.println("\n Values : As HashMap");
 	        	HashMap	newHashMap	= new HashMap<String, Object>();	
 	        	newHashMap.putAll((HashMap)value);
 	        	getHashMap(newHashMap, returnMap,key);
@@ -186,7 +186,7 @@ public static HashMap<String, Object> createHashMapFromJsonString(String json) {
                 if (value.isJsonObject()) {
                 	HashMap	newHash	=createHashMapFromJsonString(value.toString());
                     map.put(key, newHash);
-                    System.out.println("KEY 4 :"+key+":Value:"+newHash);
+                    //System.out.println("KEY 4 :"+key+":Value:"+newHash);
                     //System.out.println("KEY 4$ :"+str);
                 } else if (value.isJsonArray() && value.toString().contains(":")) {
 
@@ -195,19 +195,19 @@ public static HashMap<String, Object> createHashMapFromJsonString(String json) {
                     if (null != array) {
                         for (JsonElement element : array) {
                             list.add(createHashMapFromJsonString(element.toString()));
-                            System.out.println("Adding List :"+element.toString());
+                            //System.out.println("Adding List :"+element.toString());
                         }
-                        System.out.println("KEY 1 :"+key);
+                        //System.out.println("KEY 1 :"+key);
                         map.put(key, list);
                     }
                 } else if (value.isJsonArray() && !value.toString().contains(":")) {
                     map.put(key, value.getAsJsonArray());
-                    System.out.println("KEY 2 :"+key);
+                    //System.out.println("KEY 2 :"+key);
                 }
             } else {
             	
                 map.put(key, value.getAsString());
-                System.out.println("KEY 3 :"+key+":Value : "+value.getAsString());
+                //System.out.println("KEY 3 :"+key+":Value : "+value.getAsString());
             }
         }
     }
@@ -242,18 +242,18 @@ public static HashMap<String, Object> createHashMapFromJsonString2(String json) 
 	                    if (null != array) {
 	                        for (JsonElement element : array) {
 	                            list.add(createHashMapFromJsonString(element.toString()));
-	                            System.out.println("Adding List :"+element.toString());
+	                            //System.out.println("Adding List :"+element.toString());
 	                        }
-	                        System.out.println("KEY 1 :"+key);
+	                        //System.out.println("KEY 1 :"+key);
 	                        map.put(key, list);
 	                    }
 	                } else if (value.isJsonArray() && !value.toString().contains(":")) {
 	                    map.put(key, value.getAsJsonArray());
-	                    System.out.println("KEY 2 :"+key);
+	                    //System.out.println("KEY 2 :"+key);
 	                }
 	            } else {
 	                map.put(key, value.getAsString());
-	                System.out.println("KEY 3 :"+key);
+	                //System.out.println("KEY 3 :"+key);
 	            }
 	        }
 	    }
@@ -264,7 +264,7 @@ public static HashMap<String, Object> createHashMapFromJsonString2(String json) 
 		// TODO Auto-generated method stub
 		try {
 			Gson gson = new Gson();
-			System.out.println("\n String to be validated is :\n"+config.getJsonString());
+			//System.out.println("\n String to be validated is :\n"+config.getJsonString());
 	        gson.fromJson(config.getJsonString(), Object.class);
 	        
 	        return true;
@@ -279,12 +279,12 @@ public static HashMap<String, Object> createHashMapFromJsonString2(String json) 
 		try {
 			
 			
-			System.out.println("\n Coverting to XML :-: "+config.getJsonString());
+			//System.out.println("\n Coverting to XML :-: "+config.getJsonString());
 			
 			String re	=	config.getJsonString().replaceAll("\\s+","");
 			xml = XML.toString( new JSONObject(re));
 			
-			System.out.println("Repalce: \n"+re);
+			System.out.println("XML IS: \n"+xml);
 			
 			/*
 			//System.out.println("Repalce:Escape \n"+XML.escape(re));

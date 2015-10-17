@@ -48,5 +48,6 @@
     <module>com.jsonhandler</module>
     <module>com.dataobjects</module>
     <module>com.datahandler</module>
+    <module>com.remoteconnet</module>
   </modules>
 </project>
