@@ -12,10 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.intellizones.gateway.datahandler.json.JsonParsing;
 import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
 import com.intellizones.gateway.dataobjects.IDataObjects;
+import com.intellizones.gateway.dataobjects.exception.AppValidationException;
 import com.intellizones.gateway.datastoremanager.IDataStoreManager;
 import com.intellizones.gateway.datastoremanager.XMLDataStoreManager;
+import com.intellizones.gateway.jsonhandler.JSONDataFormatHandler;
 import com.intellizones.gateway.webproject.exception.AppException;
 import com.intellizones.gateway.webproject.util.ApplicationSessionManager;
 import com.intellizones.gateway.webproject.util.ApplicationUtil;
@@ -57,42 +60,8 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 		// TODO Auto-generated method stub
 		
 		ConnectionConfigDTO connectionConfigDTO	=	(ConnectionConfigDTO)ApplicationSessionManager.getFromSession(req, ApplicationSessionManager.REMOTECONFIGCONN);
-		Map<String, String[]> map = req.getParameterMap();
-		
-		String[] fieldNames = null;
-		String[] dataTypes = null;
-		
-		//ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),"Subitted");
-		for (Entry<String, String[]> entry : map.entrySet()) {
-		    String name = entry.getKey();
-		    String [] values	=	entry.getValue();
-		    //localFieldNames
-		    
-		    if(name.equals("locDeviceName")){
-		    	connectionConfigDTO.setLocDeviceName(req.getParameter("locDeviceName"));
-		    } else if(name.equals("locDeviceId")){
-		    	connectionConfigDTO.setLocDeviceId(req.getParameter("locDeviceId"));
-		    } else if(name.equals("locConnType")){
-		    	connectionConfigDTO.setLocConnType(req.getParameter("locConnType"));
-		    } else if(name.equals("locPortName")){
-		    	connectionConfigDTO.setLocPortName(req.getParameter("locPortName"));
-		    } else if(name.equals("locDataSize")){
-		    	connectionConfigDTO.setLocDataSize(req.getParameter("locDataSize"));
-		    	ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), req.getParameter("locDataSize"));
-		    } 
-		    
-		    if(name.equals("localFieldNames")){
-		    	fieldNames	=	values;
-		    } else if(name.equals("remoteFieldNames")){
-		    	dataTypes	=	values;
-		    }
-		    
-		    ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),name + ": " + Arrays.toString(values));
-		}
-		
-		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
-		connectionConfigDTO.setPrimaryKey(connectionConfigDTO.getLocDeviceId());
-		//ApplicationSessionManager.createNewSession(req, resp);
+		String jsonString	=	connectionConfigDTO.getJsonString();
+		ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), "JSON : "+jsonString);
 		ApplicationSessionManager.putInSession(req, ApplicationSessionManager.REMOTECONFIGCONN, connectionConfigDTO);
 		//IDataStoreManager
 		IDataStoreManager	xmlDataStore	=	new XMLDataStoreManager();
@@ -137,7 +106,45 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 	public IDataObjects validateRequest(HttpServletRequest req, HttpServletResponse resp, IHttpHandlers handler,
 			String actionId) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		
+		ConnectionConfigDTO connectionConfigDTO	=	(ConnectionConfigDTO)ApplicationSessionManager.getFromSession(req, ApplicationSessionManager.REMOTECONFIGCONN);
+		Map<String, String[]> map = req.getParameterMap();
+		
+		String[] fieldNames = null;
+		String[] dataTypes = null;
+		
+		//ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),"Subitted");
+		for (Entry<String, String[]> entry : map.entrySet()) {
+		    String name = entry.getKey();
+		    String [] values	=	entry.getValue();
+		    //localFieldNames
+		    
+		    if(name.equals("locDeviceName")){
+		    	connectionConfigDTO.setLocDeviceName(req.getParameter("locDeviceName"));
+		    } else if(name.equals("locDeviceId")){
+		    	connectionConfigDTO.setLocDeviceId(req.getParameter("locDeviceId"));
+		    } else if(name.equals("locConnType")){
+		    	connectionConfigDTO.setLocConnType(req.getParameter("locConnType"));
+		    } else if(name.equals("locPortName")){
+		    	connectionConfigDTO.setLocPortName(req.getParameter("locPortName"));
+		    } else if(name.equals("locDataSize")){
+		    	connectionConfigDTO.setLocDataSize(req.getParameter("locDataSize"));
+		    	ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), req.getParameter("locDataSize"));
+		    } 
+		    
+		    if(name.equals("localFieldNames")){
+		    	fieldNames	=	values;
+		    } else if(name.equals("remoteFieldNames")){
+		    	dataTypes	=	values;
+		    }
+		    
+		    ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),name + ": " + Arrays.toString(values));
+		}
+		
+		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
+		connectionConfigDTO.setPrimaryKey(connectionConfigDTO.getLocDeviceId());
+		
+		return connectionConfigDTO;
 		
 	}
 

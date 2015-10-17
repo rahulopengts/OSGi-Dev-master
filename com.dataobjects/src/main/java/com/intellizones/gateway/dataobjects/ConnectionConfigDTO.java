@@ -10,7 +10,23 @@ public class ConnectionConfigDTO extends CommonDTO {
 	
 	private  String connectionId	=	null;
 	private  String jsonString		=	null;
+	private  String xmlString		=	null;
 	
+	private HashMap<String, String> remoteDataFieldsKeyMap	=	null;
+	
+	
+	public HashMap<String, String> getRemoteDataFieldsKeyMap() {
+		return remoteDataFieldsKeyMap;
+	}
+	public void setRemoteDataFieldsKeyMap(HashMap<String, String> remoteDataFieldsKeyMap) {
+		this.remoteDataFieldsKeyMap = remoteDataFieldsKeyMap;
+	}
+	public String getXmlString() {
+		return xmlString;
+	}
+	public void setXmlString(String xmlString) {
+		this.xmlString = xmlString;
+	}
 	public String getJsonString() {
 		return jsonString;
 	}

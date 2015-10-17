@@ -1,6 +1,7 @@
 package com.intellizones.gateway.webproject.httphandler;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.intellizones.gateway.datahandler.json.JsonParsing;
 import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
 import com.intellizones.gateway.dataobjects.IDataObjects;
+import com.intellizones.gateway.dataobjects.exception.AppValidationException;
 import com.intellizones.gateway.jsonhandler.IDataFormatHandler;
 import com.intellizones.gateway.jsonhandler.JSONDataFormatHandler;
 import com.intellizones.gateway.webproject.datatypes.DataTypes;
@@ -106,12 +109,12 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 		    	connectionConfigDTO.setRemoteConnType(req.getParameter("remoteRESTConnURL"));
 		    } else if(name.equals("securityKey")){
 		    	connectionConfigDTO.setSecurityKey(req.getParameter("securityKey"));
-		    	ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), req.getParameter("securityKey"));
+		    	//ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), req.getParameter("securityKey"));
 		    } else if(name.equals("jsonString")){
 		    	connectionConfigDTO.setJsonString(req.getParameter("jsonString"));
 		    	IDataFormatHandler	jsonHandler	=	new JSONDataFormatHandler();
 		    	boolean isValid	=	jsonHandler.isValidFormat(connectionConfigDTO);
-		    	ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), "Validation "+isValid+req.getParameter("jsonString"));
+		    	//ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), "Validation "+isValid+req.getParameter("jsonString"));
 		    } 
 		    
 		    
@@ -121,12 +124,31 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 		    	dataTypes	=	values;
 		    }
 		    connectionConfigDTO.setTenantID("MyTenant");		    
-		    ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),name + ": " + Arrays.toString(values));
+		    //ApplicationUtil.printDebugMessage(this.getClass().getCanonicalName(),name + ": " + Arrays.toString(values));
 		}
 		
 		setFieldValues(connectionConfigDTO,fieldNames,dataTypes);
 		connectionConfigDTO.setTenantID("MyTenant");
 
+		JsonParsing	jsonParsing	=	new JsonParsing();
+		jsonParsing.isValidFormat(connectionConfigDTO);
+		HashMap<String, String> hashMap	=	null;
+		String	finalXML	=	null;
+		
+		String xmlString	=	jsonParsing.convertJSONToXML(connectionConfigDTO);
+		if(xmlString==null){
+			AppValidationException	app	=	new AppValidationException();
+			app.setErrorId("JSONVALEXCEPTION");
+			app.setErrorMessage("Error in validating JSON String. Not a valid JSON");
+			throw app;
+		} else {
+			hashMap	=	jsonParsing.processXPathAndValues(jsonParsing.convertJSONToXML(connectionConfigDTO));
+			finalXML	=	jsonParsing.getFinalXML();
+		}
+		connectionConfigDTO.setRemoteDataFieldsKeyMap(hashMap);
+		connectionConfigDTO.setXmlString(finalXML);
+		
+		
 		return connectionConfigDTO;
 	}
 	

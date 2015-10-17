@@ -8,18 +8,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+//import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONObject;
 import org.json.XML;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.intellizones.gateway.datahandler.xml.DocXPath;
 import com.intellizones.gateway.datahandler.xml.SAXCreateXPath;
+import com.intellizones.gateway.dataobjects.ConnectionConfigDTO;
+import com.intellizones.gateway.dataobjects.exception.AppValidationException;
 
 public class JsonParsing {
 static JsonParser parser = new JsonParser();
+
+public SAXCreateXPath	xpathCreate	=	null;
+
+public DocXPath	docXPath	=	null;
+
+public String finalXML	=	null;
+public String getFinalXML() {
+	return finalXML;
+}
+
+public void setFinalXML(String finalXML) {
+	this.finalXML = finalXML;
+}
+
+public JsonParsing(){
+	
+}
 
 public static void main (String[] str){
 	try{
@@ -33,8 +54,14 @@ public static void main (String[] str){
 	
 		String st="{\n\t\"id\": \"0001\",\n\t\"type\": \"donut\",\n\t\"name\": \"Cake\",\n\t\"ppu\": 0.55,\n\t\"batters\":\n\t\t{\n\t\t\t\"batter\":\n\t\t\t\t[\n\t\t\t\t\t{ \"id\": \"1001\", \"type\": \"Regular\" },\n\t\t\t\t\t{ \"id\": \"1002\", \"type\": \"Chocolate\" },\n\t\t\t\t\t{ \"id\": \"1003\", \"type\": \"Blueberry\" },\n\t\t\t\t\t{ \"id\": \"1004\", \"type\": \"Devil\'s Food\" }\n\t\t\t\t]\n\t\t},\n\t\"topping\":\n\t\t[\n\t\t\t{ \"id\": \"5001\", \"type\": \"None\" },\n\t\t\t{ \"id\": \"5002\", \"type\": \"Glazed\" },\n\t\t\t{ \"id\": \"5005\", \"type\": \"Sugar\" },\n\t\t\t{ \"id\": \"5007\", \"type\": \"Powdered Sugar\" },\n\t\t\t{ \"id\": \"5006\", \"type\": \"Chocolate with Sprinkles\" },\n\t\t\t{ \"id\": \"5003\", \"type\": \"Chocolate\" },\n\t\t\t{ \"id\": \"5004\", \"type\": \"Maple\" }\n\t\t]\n}";	
 		
+		//String st= "\t{\n\t\tcolor: \"red\",\n\t\tvalue: \"#f00\"\n\t},\n\t{\n\t\tcolor: \"green\",\n\t\tvalue: \"#0f0\"\n\t},\n\t{\n\t\tcolor: \"blue\",\n\t\tvalue: \"#00f\"\n\t},\n\t{\n\t\tcolor: \"cyan\",\n\t\tvalue: \"#0ff\"\n\t},\n\t{\n\t\tcolor: \"magenta\",\n\t\tvalue: \"#f0f\"\n\t},\n\t{\n\t\tcolor: \"yellow\",\n\t\tvalue: \"#ff0\"\n\t},\n\t{\n\t\tcolor: \"black\",\n\t\tvalue: \"#000\"\n\t}\n";
 		
-		String xml = XML.toString(new JSONObject(st));
+		JsonParsing j	=new JsonParsing();
+		
+		ConnectionConfigDTO f	=	new ConnectionConfigDTO();
+		f.setJsonString(st);
+		String xml = j.convertJSONToXML(f); 
+				//XML.toString(new JSONObject(st));
 		System.out.println(xml);
 		
 		/***************Convert to XML******************************/
@@ -48,7 +75,7 @@ public static void main (String[] str){
 		/**Filter List to remove any Node which does not have value. It may have child nodes**/
 		DocXPath	docXPath	=	new DocXPath(xml);
 		docXPath.initDocumentBuilder();
-		docXPath.setXPathValue("//rootiot/ppu", "10.01");
+//		docXPath.setXPathValue("//rootiot/ppu", "10.01");
 		
 		docXPath.getXPathValue(xml,listTag);
 		/**Get Xpath Key and Value FinalList**/
@@ -233,4 +260,96 @@ public static HashMap<String, Object> createHashMapFromJsonString2(String json) 
 	    return map;
 	}
 
+	public boolean isValidFormat(ConnectionConfigDTO config) {
+		// TODO Auto-generated method stub
+		try {
+			Gson gson = new Gson();
+			System.out.println("\n String to be validated is :\n"+config.getJsonString());
+	        gson.fromJson(config.getJsonString(), Object.class);
+	        
+	        return true;
+	      } catch(com.google.gson.JsonSyntaxException ex) { 
+	        return false;
+	      }
+	}
+	
+	public String convertJSONToXML(ConnectionConfigDTO config)  throws AppValidationException{
+		// TODO Auto-generated method stub
+		String xml = null;
+		try {
+			
+			
+			System.out.println("\n Coverting to XML :-: "+config.getJsonString());
+			
+			String re	=	config.getJsonString().replaceAll("\\s+","");
+			xml = XML.toString( new JSONObject(re));
+			
+			System.out.println("Repalce: \n"+re);
+			
+			/*
+			//System.out.println("Repalce:Escape \n"+XML.escape(re));
+			System.out.println("Repalce:XML \n"+XML.toString(new JSONObject(re)));
+			
+			
+			String convert	=	XML.escape(config.getJsonString());
+			String s2 = convert;//.replaceAll("\r\n\t", "");
+			
+			System.out.println("\n Escaped: \n"+s2);
+			xml = XML.toString( new JSONObject(config.getJsonString()));
+			
+			System.out.println("\n Second Escaped: \n"+xml);
+			*/
+			//JSONObject	s=	new JSONObject(convert);
+			
+		} catch(com.google.gson.JsonSyntaxException ex) {
+			ex.printStackTrace();
+			AppValidationException	app	=	new AppValidationException();
+			app.setErrorId("JSONCONVERT");
+			app.setErrorMessage("Could not convert to String. Invalid JSON");
+			throw app;
+	    }
+		return xml;
+	}
+
+	public HashMap<String, String> processXPathAndValues(String xml) throws Exception{
+		HashMap	h	=	null;
+		try{
+			finalXML	=	"<rootiot>"+xml+"</rootiot>";
+			xpathCreate	=	new SAXCreateXPath();
+			List listTag	=	xpathCreate.parseXML(finalXML);
+			
+			//check if there was ny duplicates
+			if(xpathCreate.getDuplicateTageList()!=null && 
+					xpathCreate.getDuplicateTageList().size()>0){
+				AppValidationException	app	=	new AppValidationException();
+				app.setErrorId("JSONCONVERT");
+				app.setErrorMessage("JSON Message as Duplicates for "+xpathCreate.getDuplicateTageList().get(0));
+				throw app;
+				
+			}
+			docXPath	=	new DocXPath(finalXML);
+			docXPath.initDocumentBuilder();
+			//docXPath.setXPathValue("//rootiot/ppu", "10.01");
+			
+			docXPath.getXPathValue(finalXML,listTag);
+			h	=	(HashMap<String, String> )docXPath.getxPathKeyValue();
+			Set s	=	h.keySet();
+			Iterator	iterateFinal	=	s.iterator();
+			System.out.println("Final List\n");
+			while(iterateFinal.hasNext()){
+				String key	=	(String)iterateFinal.next();
+				String value=	(String)h.get(key);
+				System.out.println(key +":"+value);
+			}
+			//docXPath.writeToFile();
+			
+		} catch (Exception e){
+			AppValidationException	app	=	new AppValidationException();
+			app.setErrorId("JSONCONVERT");
+			app.setErrorMessage("Could not convert to String. Invalid JSON");
+			throw app;
+		}
+		
+		return h;
+	}
 }
