@@ -146,8 +146,7 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 		}
 		connectionConfigDTO.setRemoteDataFieldsKeyMap(hashMap);
 		connectionConfigDTO.setXmlString(finalXML);
-		
-		
+		connectionConfigDTO.setXmlDocument(jsonParsing.getDocXPath().getDoc());
 		return connectionConfigDTO;
 	}
 	
@@ -157,7 +156,6 @@ public class RemoteConfigPageHandler extends AbstractHttpRequestHandler {
 				ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), fieldNames[index]+": "+dataTypes[index]);
 				connectionConfigDTO.addFieldAndDataType(fieldNames[index], dataTypes[index]);
 			}
-			
 		}
 	}
 	

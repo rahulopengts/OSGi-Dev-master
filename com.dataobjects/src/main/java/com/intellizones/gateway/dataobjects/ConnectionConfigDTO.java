@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.w3c.dom.Document;
+
 public class ConnectionConfigDTO extends CommonDTO {
 
 	public ConnectionConfigDTO(){
@@ -169,7 +171,21 @@ public class ConnectionConfigDTO extends CommonDTO {
 	private String localFieldIndexFrom	=	null;
 	private String localFieldIndexTo		=	null;
 	private String localSensorDataFormat	=	null;
+	private Document xmlDocument	=	null;
 	
+	
+	public Document getXmlDocument() {
+		return xmlDocument;
+	}
+
+
+
+	public void setXmlDocument(Document xmlDocument) {
+		this.xmlDocument = xmlDocument;
+	}
+
+
+
 	public String toString() {
 		String toString	=	"<connectionId>"+connectionId+"</connectionId>"+
 		"<jsonString>"+jsonString+"</jsonString>"+

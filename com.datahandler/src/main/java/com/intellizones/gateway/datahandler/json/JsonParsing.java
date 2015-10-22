@@ -29,6 +29,13 @@ public SAXCreateXPath	xpathCreate	=	null;
 
 public DocXPath	docXPath	=	null;
 
+public DocXPath getDocXPath() {
+	return docXPath;
+}
+
+public void setDocXPath(DocXPath docXPath) {
+	this.docXPath = docXPath;
+}
 public String finalXML	=	null;
 public String getFinalXML() {
 	return finalXML;

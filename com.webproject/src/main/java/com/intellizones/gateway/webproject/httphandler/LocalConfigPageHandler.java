@@ -64,7 +64,7 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 		IDataStoreManager	xmlDataStore	=	new XMLDataStoreManager();
 		xmlDataStore.persistDataObject(connectionConfigDTO, connectionConfigDTO.getPrimaryKey());
 		
-		ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), connectionConfigDTO.toString());
+		//ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), connectionConfigDTO.toString());
 	}
 
 	@Override
@@ -213,7 +213,6 @@ public class LocalConfigPageHandler extends AbstractHttpRequestHandler {
 				//ApplicationUtil.printDebugMessage(this.getClass().getSimpleName(), localFieldDataFromIndex[index]+": "+dataTypes[index]);
 				//System.out.println(dataTypes[index]+": VALUE :"+localFieldDataFromIndex[index]+":"+localFieldDataToIndex[index]);
 				connectionConfigDTO.addLocAndRemoteFieldMap(dataTypes[index],localFieldDataFromIndex[index]+":"+localFieldDataToIndex[index]);
-				
 			}
 			
 		//}

@@ -39,10 +39,17 @@ public class DocXPath {
 		xPathKeyValue	=	new HashMap<String, String>();
 	}
 	
-			private DocumentBuilderFactory domFactory =	null; 
-			private DocumentBuilder builder =	null;
-			private Document doc =	null;
-			private XPath xpath =	null;
+	private DocumentBuilderFactory domFactory =	null; 
+	private DocumentBuilder builder =	null;
+	private Document doc =	null;
+	public Document getDoc() {
+		return doc;
+	}
+	public void setDoc(Document doc) {
+		this.doc = doc;
+	}
+
+	private XPath xpath =	null;
 			
 			
 	public void initDocumentBuilder(){
